@@ -120,16 +120,10 @@ if (cisst_FOUND_AS_REQUIRED)
     cisst_ros2_crtk
     )
 
-  install (TARGETS dvrk_console_json
-    DESTINATION lib/${PROJECT_NAME}
-    )
-
-  install (
-    TARGETS dvrk_console_json
-    EXPORT dvrk_robot
+  install (TARGETS dvrk_utilities dvrk_console_json
+    LIBRARY DESTINATION lib/${PROJECT_NAME}
+    RUNTIME DESTINATION lib/${PROJECT_NAME}
     LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
     )
 
