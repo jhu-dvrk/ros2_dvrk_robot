@@ -5,7 +5,7 @@
   Author(s):  Anton Deguet
   Created on: 2015-07-18
 
-  (C) Copyright 2015-2021 Johns Hopkins University (JHU), All Rights Reserved.
+  (C) Copyright 2015-2022 Johns Hopkins University (JHU), All Rights Reserved.
 
 --- begin cisst license - do not edit ---
 
@@ -37,7 +37,7 @@ dvrk::console::console(const std::string & name,
                        const double & publish_rate_in_seconds,
                        const double & tf_rate_in_seconds,
                        mtsIntuitiveResearchKitConsole * mts_console):
-    mts_ros_crtk_bridge(name, node),
+    mts_ros_crtk_bridge_provided(name, node),
     m_console(mts_console)
 {
     // start creating components
@@ -45,7 +45,7 @@ dvrk::console::console(const std::string & name,
 
     // create all ROS bridges
     std::string m_bridge_name = "dvrk_ros" + std::string(node->get_namespace());
-    clean_namespace(m_bridge_name);
+    cisst_ros_crtk::clean_namespace(m_bridge_name);
 
     // shared publish bridge
     m_pub_bridge = new mtsROSBridge(m_bridge_name, publish_rate_in_seconds, node);
@@ -609,7 +609,7 @@ void dvrk::console::add_topics_psm_io(const std::string & _arm_name,
 void dvrk::console::add_topics_teleop_ecm(const std::string & _name)
 {
     std::string _ros_namespace = _name + "/";
-    clean_namespace(_ros_namespace);
+    cisst_ros_crtk::clean_namespace(_ros_namespace);
 
     // messages
     events_bridge().AddLogFromEventWrite(_name + "-log", "error",
@@ -656,7 +656,7 @@ void dvrk::console::add_topics_teleop_ecm(const std::string & _name)
 void dvrk::console::add_topics_teleop_psm(const std::string & _name)
 {
     std::string _ros_namespace = _name + "/";
-    clean_namespace(_ros_namespace);
+    cisst_ros_crtk::clean_namespace(_ros_namespace);
 
     // messages
     events_bridge().AddLogFromEventWrite(_name + "-log", "error",
