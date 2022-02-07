@@ -56,7 +56,6 @@ if (cisst_FOUND_AS_REQUIRED)
 
   include_directories (
     ${dvrk_robot_SOURCE_DIR}/include
-    ${CATKIN_DEVEL_PREFIX}/include
     ${sawRobotIO1394_INCLUDE_DIR}
     ${sawControllers_INCLUDE_DIR}
     ${sawIntuitiveResearchKit_INCLUDE_DIR}
@@ -78,7 +77,6 @@ if (cisst_FOUND_AS_REQUIRED)
     ${sawRobotIO1394_LIBRARIES}
     ${sawIntuitiveResearchKit_LIBRARIES}
     ${sawControllers_LIBRARIES}
-    ${catkin_LIBRARIES}
     )
   cisst_target_link_libraries (dvrk_utilities ${REQUIRED_CISST_LIBRARIES})
   ament_target_dependencies (
@@ -102,7 +100,6 @@ if (cisst_FOUND_AS_REQUIRED)
     ${sawRobotIO1394_LIBRARIES}
     ${sawIntuitiveResearchKit_LIBRARIES}
     ${sawControllers_LIBRARIES}
-    ${catkin_LIBRARIES}
     )
   cisst_target_link_libraries (dvrk_console_json ${REQUIRED_CISST_LIBRARIES})
   target_link_libraries (dvrk_console_json dvrk_utilities)
