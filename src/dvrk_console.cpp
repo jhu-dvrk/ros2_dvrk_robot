@@ -516,23 +516,23 @@ void dvrk::console::add_topics_arm_io(mtsROSBridge * _pub_bridge,
     _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
                                              sensor_msgs::msg::JointState>
         (_interface_name, "GetAnalogInputPosSI",
-         _ros_namespace + "analog_input_pos_si");
+         _ros_namespace + "pot/measured_js");
     _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
                                              sensor_msgs::msg::JointState>
         (_interface_name, "measured_js",
-         _ros_namespace + "joint_measured_js");
+         _ros_namespace + "joint/measured_js");
     _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
                                              sensor_msgs::msg::JointState>
         (_interface_name, "actuator_measured_js",
-         _ros_namespace + "actuator_measured_js");
+         _ros_namespace + "actuator/measured_js");
     _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec,
                                              sensor_msgs::msg::JointState>
         (_interface_name, "GetActuatorFeedbackCurrent",
-         _ros_namespace + "actuator_measured_current");
+         _ros_namespace + "actuator/measured_current");
     _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec,
                                              sensor_msgs::msg::JointState>
         (_interface_name, "GetActuatorRequestedCurrent",
-         _ros_namespace + "actuator_servo_current");
+         _ros_namespace + "actuator/servo_current");
 
     m_connections.Add(_pub_bridge->GetName(), _interface_name,
                       _io_component_name, _arm_name);
