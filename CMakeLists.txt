@@ -1,5 +1,5 @@
 #
-# (C) Copyright 2015-2021 Johns Hopkins University (JHU), All Rights Reserved.
+# (C) Copyright 2015-2022 Johns Hopkins University (JHU), All Rights Reserved.
 #
 # --- begin cisst license - do not edit ---
 #
@@ -15,6 +15,7 @@ project (dvrk_robot VERSION 2.1)
 find_package (ament_cmake REQUIRED)
 find_package (rclcpp REQUIRED)
 find_package (std_msgs REQUIRED)
+find_package (std_srvs REQUIRED)
 find_package (geometry_msgs REQUIRED)
 find_package (sensor_msgs REQUIRED)
 find_package (diagnostic_msgs REQUIRED)
