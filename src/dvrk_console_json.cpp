@@ -5,7 +5,7 @@
   Author(s):  Anton Deguet
   Created on: 2015-07-18
 
-  (C) Copyright 2015-2021 Johns Hopkins University (JHU), All Rights Reserved.
+  (C) Copyright 2015-2023 Johns Hopkins University (JHU), All Rights Reserved.
 
 --- begin cisst license - do not edit ---
 
@@ -74,7 +74,7 @@ int main(int argc, char ** argv)
     cmnLogger::HaltDefaultLog(); // stop log to default cisstLog.txt
 
     // create ROS node handle
-    rclcpp::init(argc, argv);
+    std::vector<std::string> non_ros_arguments = rclcpp::init_and_remove_ros_arguments(argc, argv);
     auto rosNode = std::make_shared<rclcpp::Node>("dVRK");
 
     // parse options
@@ -125,10 +125,7 @@ int main(int argc, char ** argv)
                              "replaces the default Qt palette with darker colors");
 
     // check that all required options have been provided
-    std::string errorMessage;
-    if (!options.Parse(argc, argv, errorMessage)) {
-        std::cerr << "Error: " << errorMessage << std::endl;
-        options.PrintUsage(std::cerr);
+    if (!options.Parse(non_ros_arguments, std::cerr)) {
         return -1;
     }
     std::string arguments;
