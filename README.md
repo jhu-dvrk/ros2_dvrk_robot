@@ -6,7 +6,7 @@ subscribes ROS 2 topics.
 
 # Depends
 
-* sawIntuititiveResearchKit 
+* sawIntuititiveResearchKit
 * cisst-ros2
 
 IMPORTANT: You first need to make sure you have all your configuration
@@ -21,17 +21,9 @@ For the Qt based application without rviz:
   ros2 run dvrk_robot dvrk_console_json -j <path_to_your_console_config.json>
 ```
 
-We also provide a launch script for single arm using RViz (you need to provide your own console_<arm>.json file):
-```sh
-  ros2 launch dvrk_robot dvrk_arm_rviz.launch arm:=PSM1 config:=/home/<user_name>/catkin_ws/src/cisst-saw/sawIntuitiveResearchKit/share/jhu-dVRK/console-PSM1.json
-```
+Launch files can be found in the `dvrk_model` package.
 
-One can also simulate one or more arms using the field `simulation` in your console-xyz.json.  See examples in the `sawIntuitiveResearchKit/share` directory:
-```sh
-  ros2 launch dvrk_robot dvrk_arm_rviz.launch arm:=ECM
-```
-
-We provide a few console configurations for simulated arms in `sawIntuitiveResearchKit/share/console`.  By default, the launch file `dvrk_arm_rviz.launch` will look for the file `console/console-$(arg arm)_KIN_SIMULATED.json`.
+We provide a few console configurations for simulated arms in `src/cisst-saw/sawIntuitiveResearchKit/share/console`.
 
 # Using the ROS 2 topics
 
