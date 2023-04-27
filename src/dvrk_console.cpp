@@ -5,7 +5,7 @@
   Author(s):  Anton Deguet
   Created on: 2015-07-18
 
-  (C) Copyright 2015-2022 Johns Hopkins University (JHU), All Rights Reserved.
+  (C) Copyright 2015-2023 Johns Hopkins University (JHU), All Rights Reserved.
 
 --- begin cisst license - do not edit ---
 
@@ -38,6 +38,8 @@ dvrk::console::console(const std::string & name,
                        const double & tf_rate_in_seconds,
                        mtsIntuitiveResearchKitConsole * mts_console):
     mts_ros_crtk_bridge_provided(name, node),
+    m_publish_rate(publish_rate_in_seconds),
+    m_tf_rate(tf_rate_in_seconds),
     m_console(mts_console)
 {
     // start creating components
@@ -86,7 +88,7 @@ dvrk::console::console(const std::string & name,
                 bridge_interface_provided(arm.ComponentName(),
                                           arm.InterfaceName(),
                                           publish_rate_in_seconds, tf_rate_in_seconds);
-            } else if (arm.m_type == mtsIntuitiveResearchKitConsole::Arm::ARM_SUJ) {
+            } else if (arm.suj()) {
                 const auto _sujs = std::list<std::string>({"PSM1", "PSM2", "PSM3", "ECM"});
                 for (auto const & _suj : _sujs) {
                     bridge_interface_provided(name,
@@ -501,6 +503,21 @@ void dvrk::console::add_topics_io(void)
 
     m_connections.Add(m_pub_bridge->GetName(), "io",
                       m_console->m_IO_component_name, "Configuration");
+}
+
+void dvrk::console::add_topics_pid(void)
+{
+    for (auto armPair : m_console->mArms) {
+        auto name = armPair.first;
+        auto arm = *(armPair.second);
+        if (arm.expects_PID()) {
+            const auto pid_component_name = name + "-PID";
+            bridge_interface_provided(pid_component_name,
+                                      "Monitoring",
+                                      name + "/pid",
+                                      m_publish_rate, m_tf_rate);
+        }
+    }
 }
 
 void dvrk::console::add_topics_arm_io(mtsROSBridge * _pub_bridge,

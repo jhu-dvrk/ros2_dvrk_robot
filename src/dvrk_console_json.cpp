@@ -26,6 +26,7 @@ http://www.cisst.org/cisst/license.txt.
 #include <cisstCommon/cmnGetChar.h>
 #include <cisstCommon/cmnQt.h>
 #include <cisstOSAbstraction/osaGetTime.h>
+#include <cisstOSAbstraction/osaSleep.h>
 #include <cisstMultiTask/mtsCollectorFactory.h>
 #include <cisstMultiTask/mtsCollectorQtFactory.h>
 #include <cisstMultiTask/mtsCollectorQtWidget.h>
@@ -102,6 +103,9 @@ int main(int argc, char ** argv)
     options.AddOptionMultipleValues("i", "ros-io-config",
                                     "json config file to configure ROS bridges to collect low level data (IO)",
                                     cmnCommandLineOptions::OPTIONAL_OPTION, &jsonIOConfigFiles);
+
+    options.AddOptionNoValue("I", "pid-topics",
+                             "add some extra publishers to monitor PID state");
 
     options.AddOptionNoValue("t", "text-only",
                              "text only interface, do not create Qt widgets");
@@ -210,6 +214,9 @@ int main(int argc, char ** argv)
         consoleROS->Configure(*iter);
     }
 
+    if (options.IsSet("pid-topics")) {
+        consoleROS->add_topics_pid();
+    }
     componentManager->AddComponent(consoleROS);
     consoleROS->Connect();
 
