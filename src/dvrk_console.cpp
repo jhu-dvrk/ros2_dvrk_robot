@@ -210,6 +210,10 @@ void dvrk::console::bridge_interface_provided_arm(const std::string & _arm_name,
                                                      std_msgs::msg::Bool>
         (_required_interface_name, "body/set_cf_orientation_absolute",
          _arm_name + "/body/set_cf_orientation_absolute");
+    subscribers_bridge().AddServiceFromCommandQualifiedRead<vctDoubleVec, vctDoubleVec,
+                                                            cisst_msgs::srv::ConvertFloat64Array>
+        (_required_interface_name, "actuator_to_joint_position",
+         _arm_name + "/actuator_to_joint_position");
 
     events_bridge().AddPublisherFromEventWrite<std::string,
                                                std_msgs::msg::String>
