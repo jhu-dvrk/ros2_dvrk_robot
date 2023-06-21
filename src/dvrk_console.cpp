@@ -512,8 +512,8 @@ void dvrk::console::add_topics_io(void)
 void dvrk::console::add_topics_pid(void)
 {
     for (auto armPair : m_console->mArms) {
-        auto name = armPair.first;
-        auto arm = *(armPair.second);
+        const auto name = armPair.first;
+        const auto arm = *(armPair.second);
         if (arm.expects_PID()) {
             const auto pid_component_name = name + "-PID";
             bridge_interface_provided(pid_component_name,
@@ -530,26 +530,27 @@ void dvrk::console::add_topics_arm_io(mtsROSBridge * _pub_bridge,
 {
     const std::string _ros_namespace = _arm_name + "/io/";
     const std::string _interface_name = _arm_name + "-io";
-    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
-                                             sensor_msgs::msg::JointState>
-        (_interface_name, "GetAnalogInputPosSI",
+    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint, sensor_msgs::msg::JointState>
+        (_interface_name, "pot/measured_js",
          _ros_namespace + "pot/measured_js");
-    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
-                                             sensor_msgs::msg::JointState>
+    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint, sensor_msgs::msg::JointState>
         (_interface_name, "measured_js",
-         _ros_namespace + "joint/measured_js");
-    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint,
-                                             sensor_msgs::msg::JointState>
-        (_interface_name, "actuator_measured_js",
          _ros_namespace + "actuator/measured_js");
-    _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec,
-                                             sensor_msgs::msg::JointState>
+    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint, sensor_msgs::msg::JointState>
+        (_interface_name, "software/measured_js",
+         _ros_namespace + "software/measured_js");
+    _pub_bridge->AddPublisherFromCommandRead<prmStateJoint, sensor_msgs::msg::JointState>
+        (_interface_name, "firmware/measured_js",
+         _ros_namespace + "firmware/measured_js");
+    _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec, sensor_msgs::msg::JointState>
         (_interface_name, "GetActuatorFeedbackCurrent",
          _ros_namespace + "actuator/measured_current");
-    _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec,
-                                             sensor_msgs::msg::JointState>
+    _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec, sensor_msgs::msg::JointState>
         (_interface_name, "GetActuatorRequestedCurrent",
          _ros_namespace + "actuator/servo_current");
+    _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec, sensor_msgs::msg::JointState>
+        (_interface_name, "GetActuatorTimestamp",
+         _ros_namespace + "timestamp");
 
     m_connections.Add(_pub_bridge->GetName(), _interface_name,
                       _io_component_name, _arm_name);
