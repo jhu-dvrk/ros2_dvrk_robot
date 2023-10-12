@@ -55,6 +55,14 @@ repositories:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_python.git
     version: main
+  crtk/crtk_matlab_client:
+    type: git
+    url: https://github.com/collaborative-robotics/ros2_crtk_matlab_client.git
+    version: main
+  dvrk/dvrk_matlab:
+    type: git
+    url: https://github.com/jhu-dvrk/ros2_dvrk_matlab.git
+    version: main
   dvrk/dvrk_model:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_model.git
