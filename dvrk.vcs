@@ -63,6 +63,10 @@ repositories:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_matlab.git
     version: main
+  dvrk/dvrk-gravity-compensation:
+    type: git 
+    url: https://github.com/jhu-dvrk/dvrk-gravity-compensation.git
+    version: devel
   dvrk/dvrk_model:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_model.git
