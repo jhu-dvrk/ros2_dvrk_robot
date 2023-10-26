@@ -25,7 +25,6 @@ http://www.cisst.org/cisst/license.txt.
 #include <cisstCommon/cmnCommandLineOptions.h>
 #include <cisstCommon/cmnGetChar.h>
 #include <cisstCommon/cmnQt.h>
-#include <cisstOSAbstraction/osaGetTime.h>
 #include <cisstMultiTask/mtsCollectorFactory.h>
 #include <cisstMultiTask/mtsCollectorQtFactory.h>
 #include <cisstMultiTask/mtsCollectorQtWidget.h>
@@ -66,17 +65,7 @@ int main(int argc, char ** argv)
     std::setlocale(LC_ALL, "C");
 
     // log configuration
-    cmnLogger::SetMask(CMN_LOG_ALLOW_ALL);
-    cmnLogger::SetMaskDefaultLog(CMN_LOG_ALLOW_ALL);
-    cmnLogger::SetMaskFunction(CMN_LOG_ALLOW_ALL);
-    cmnLogger::SetMaskClassMatching("mtsIntuitiveResearchKit", CMN_LOG_ALLOW_ALL);
-    cmnLogger::AddChannel(std::cerr, CMN_LOG_ALLOW_ERRORS_AND_WARNINGS);
-    // add log file with date so logs don't get overwritten
-    std::string currentDateTime;
-    osaGetDateTimeString(currentDateTime);
-    std::ofstream logFileStream(std::string("cisstLog-" + currentDateTime + ".txt").c_str());
-    cmnLogger::AddChannel(logFileStream);
-    cmnLogger::HaltDefaultLog(); // stop log to default cisstLog.txt
+    mtsIntuitiveResearchKit::Logger logger; 
 
     // create ROS node handle
     std::vector<std::string> non_ros_arguments = rclcpp::init_and_remove_ros_arguments(argc, argv);
@@ -247,8 +236,7 @@ int main(int argc, char ** argv)
     componentManager->Cleanup();
 
     // stop all logs
-    cmnLogger::Kill();
-    cmnLogger::RemoveChannel(logFileStream);
+    logger.Stop();
 
     // stop ROS node
     rclcpp::shutdown();
