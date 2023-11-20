@@ -70,7 +70,7 @@ repositories:
   dvrk/dvrk-gravity-compensation:
     type: git
     url: https://github.com/jhu-dvrk/dvrk-gravity-compensation.git
-    version: devel
+    version: ros2
   dvrk/dvrk_config_jhu:
     type: git
     url: https://github.com/jhu-dvrk/dvrk_config_jhu.git

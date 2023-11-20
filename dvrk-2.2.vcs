@@ -46,11 +46,11 @@ repositories:
   crtk/crtk_python_client:
     type: git
     url: https://github.com/collaborative-robotics/ros2_crtk_python_client.git
-    version: 1.1.0
+    version: 1.2.0
   crtk/crtk_matlab_client:
     type: git
     url: https://github.com/collaborative-robotics/ros2_crtk_matlab_client.git
-    version: 1.1.0
+    version: 1.2.0
   dvrk/dvrk_robot:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_robot.git
@@ -70,7 +70,7 @@ repositories:
   dvrk/dvrk-gravity-compensation:
     type: git
     url: https://github.com/jhu-dvrk/dvrk-gravity-compensation.git
-    version: 2.2.0
+    version: ros2
   dvrk/dvrk_config_jhu:
     type: git
     url: https://github.com/jhu-dvrk/dvrk_config_jhu.git
