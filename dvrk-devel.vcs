@@ -31,6 +31,10 @@ repositories:
     type: git
     url: https://github.com/jhu-saw/sawRobotIO1394.git
     version: devel
+  cisst-saw/sawRobotIO1394ROS2:
+    type: git
+    url: https://github.com/jhu-saw/sawRobotIO1394ROS2.git
+    version: devel
   cisst-saw/sawControllers:
     type: git
     url: https://github.com/jhu-saw/sawControllers.git
@@ -54,6 +58,10 @@ repositories:
   dvrk/dvrk_robot:
     type: git
     url: https://github.com/jhu-dvrk/ros2_dvrk_robot.git
+    version: devel
+  dvrk/dvrk_arm_from_ros:
+    type: git
+    url: https://github.com/jhu-dvrk/ros2_dvrk_arm_from_ros.git
     version: devel
   dvrk/dvrk_python:
     type: git
