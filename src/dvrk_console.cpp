@@ -592,6 +592,30 @@ void dvrk::console::add_topics_psm_io(const std::string & _arm_name,
     }
 }
 
+void dvrk::console::add_topics_suj_voltages(void)
+{
+    mtsManagerLocal * _component_manager = mtsManagerLocal::GetInstance();
+    mtsComponent * _suj = _component_manager->GetComponent("SUJ");
+    if (!_suj) {
+        CMN_LOG_CLASS_INIT_WARNING << "add_topics_suj_voltages: no SUJ on this console!  option -s ignored!" << std::endl;
+        return;
+    }
+    mtsROSBridge * _pub_bridge = new mtsROSBridge("SUJ-Voltages", 0.01 * cmn_s,
+                                                node_handle_ptr());
+    const auto arms = std::list<std::string>({"ECM", "PSM1", "PSM2", "PSM3"});
+    for (auto arm : arms) { 
+        _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec, sensor_msgs::msg::JointState>
+            ("SUJ-" + arm, "GetVoltagesPrimary",
+             "SUJ/" + arm + "/primary_voltage");
+        _pub_bridge->AddPublisherFromCommandRead<vctDoubleVec, sensor_msgs::msg::JointState>
+            ("SUJ-" + arm, "GetVoltagesSecondary",
+             "SUJ/" + arm + "/secondary_voltage");
+        m_connections.Add(_pub_bridge->GetName(), "SUJ-" + arm,
+                          "SUJ", arm);
+    }
+    _component_manager->AddComponent(_pub_bridge);
+}
+
 void dvrk::console::add_topics_teleop_ecm(const std::string & _name)
 {
     std::string _ros_namespace = _name + "/";
