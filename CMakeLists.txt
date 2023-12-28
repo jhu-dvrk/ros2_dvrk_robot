@@ -10,7 +10,7 @@
 # --- end cisst license ---
 
 cmake_minimum_required (VERSION 3.10)
-project (dvrk_robot VERSION 2.2.0)
+project (dvrk_robot VERSION 2.2.1)
 
 find_package (ament_cmake REQUIRED)
 find_package (rclcpp REQUIRED)
